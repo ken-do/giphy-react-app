@@ -1,0 +1,167 @@
+@keyframes placeHolderShimmer {
+  0% {
+    background-position: -30vw 0
+  }
+
+  100% {
+    background-position: 30vw 0
+  }
+}
+
+@mixin image-box-animation {
+  animation-duration: 1.5s;
+  animation-fill-mode: forwards;
+  animation-iteration-count: infinite;
+  animation-name: placeHolderShimmer;
+  animation-timing-function: linear;
+  background: linear-gradient(to right, #eeeeee 8%, #e9e9e9 18%, #eeeeee 33%);
+  position: relative;
+  -webkit-backface-visibility: hidden;
+}
+
+
+@-webkit-keyframes background-spin {
+	from {-webkit-transform:rotate(0deg);}
+	to {-webkit-transform:rotate(360deg);}
+}
+
+@keyframes background-spin {
+	from {transform:rotate(0deg);}
+	to {transform:rotate(360deg);}
+}
+
+
+body {
+  margin: 0;
+  background-color: #f3f3f3;
+
+  &.full-screen{
+    overflow-y: hidden;
+
+    .Spinner{
+      display: block;
+    }
+  }
+}
+
+
+
+.Spinner {
+  position:fixed;
+  width:100%;
+  left:0;
+  right:0;
+  top:0;
+  bottom:0;
+  background-color: rgba(255,255,255,0.7);
+  z-index:9999;
+  display:none;
+  z-index: 2;
+
+  &::after {
+    content:'';
+    display:block;
+    position:absolute;
+    left:48%;top:40%;
+    width: 2.5rem;
+    height: 2.5rem;
+    border-style:solid;
+    border-color:black;
+    border-top-color:transparent;
+    border-width: 4px;
+    border-radius:50%;
+    -webkit-animation: background-spin .8s linear infinite;
+    animation: background-spin .8s linear infinite;
+  }
+
+  &.show{
+    display: block;
+  }
+  
+}
+
+.Heading {
+  text-align: center;
+  font-family: sans-serif;
+  color: #6e7a7c;
+  text-transform: uppercase;
+}
+
+
+.ImagesList {
+  max-width: 1160px;
+  margin: 2rem auto;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  grid-gap: 2rem;
+  padding: 0.8rem;
+}
+
+.ImageBox {
+  display: block;
+  background-color: white;
+  padding: 1.5rem 0.8rem 2.5rem 0.8rem;
+  box-shadow: 2px 2px 2px #d7d7d7;
+  border: 2px solid transparent;
+  transition: border .2s;
+
+  &:hover {
+    border: 2px solid #add5f9;
+    cursor: pointer;
+  }
+
+  &:focus {
+    border: 2px solid #5bb1ff;
+  }
+
+  img {
+    background-color: #f3f3f3;
+    width: 100%;
+    object-fit: cover;
+    @include image-box-animation;
+
+  }
+}
+
+.ImageFullScreen {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 3;
+
+  img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .close-btn {
+    position: absolute;
+    top: 1.5rem;
+    right: 1.5rem;
+    color: #ececec;
+    background-color: rgba(0, 0, 0, 0.56);
+    padding: 0.8rem 1rem;
+    font-family: sans-serif;
+    border: 1px solid white;
+    border-radius: 4px;
+    transition: background-color .2s;
+
+    .triangle {
+      width: 0;
+      height: 0;
+      border-left: 0.8rem solid transparent;
+      border-right: 0.8rem solid transparent;
+      display: table-cell;
+      border-top: 0.8rem solid white;
+    }
+
+    &:hover {
+      background-color: rgba(0, 0, 0, 0.97);
+      cursor: pointer;
+    }
+  }
+}
+
