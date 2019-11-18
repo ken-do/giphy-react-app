@@ -23,7 +23,7 @@ module.exports = ({ mode } = { mode: 'production' }) => {
       module: {
         rules: [
           {
-            test: /\.jpe?g|png$/,
+            test: /\.jpe?g|png|gif$/,
             exclude: /node_modules/,
             loader: ['url-loader', 'file-loader']
           },

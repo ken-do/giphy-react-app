@@ -32,6 +32,7 @@
     "node-sass": "^4.12.0",
     "optimize-css-assets-webpack-plugin": "^5.0.3",
     "react-hot-loader": "^4.12.11",
+    "rimraf": "^3.0.0",
     "sass-loader": "^7.2.0",
     "standard": "^14.0.0",
     "style-loader": "^1.0.0",
@@ -42,10 +43,10 @@
     "webpack-merge": "^4.2.1"
   },
   "scripts": {
-    "webpack": "webpack",
-    "webpack-dev-server": "webpack-dev-server",
-    "start": "npm run webpack-dev-server -- --env.mode development",
-    "build": "npm run webpack -- --env.mode production",
+    "clean": "rimraf build",
+    "serve": "webpack-dev-server",
+    "start": "npm run serve -- --env.mode development",
+    "build": "npm run clean && webpack --env.mode production",
     "test": "jest --watchAll || ECHO.",
     "standard": "standard || ECHO."
   },
