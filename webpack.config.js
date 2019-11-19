@@ -3,6 +3,7 @@ const webpack = require('webpack')
 const webpackMerge = require('webpack-merge')
 const HtmlWebPackPlugin = require('html-webpack-plugin')
 const Dotenv = require('dotenv-webpack')
+const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 
 const modeConfiguration = env => require(`./build-utils/webpack.${env}`)(env)
 
@@ -38,6 +39,7 @@ module.exports = ({ mode } = { mode: 'production' }) => {
       },
       plugins: [
         new Dotenv(),
+        new CleanWebpackPlugin(),
         new HtmlWebPackPlugin({
           template: './src/index.html',
           filename: './index.html'
