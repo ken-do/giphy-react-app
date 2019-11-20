@@ -47,7 +47,7 @@
     "start": "npm run serve -- --env.mode development",
     "build": "webpack --env.mode production",
     "test": "jest --watchAll || ECHO.",
-    "standard": "standard || ECHO."
+    "standard-fix": "standard --fix || ECHO."
   },
   "keywords": [],
   "author": "",
@@ -60,5 +60,10 @@
   "sideEffects": [
     "**/*.css",
     "**/*.scss"
-  ]
+  ],
+  "standard": {
+    "ignore": [
+      "**/*.test.js"
+    ]
+  }
 }
