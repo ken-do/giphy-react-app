@@ -1,82 +1,69 @@
-import React, { Fragment, Component } from 'react'
+import React, { Fragment, Component, useEffect, useState } from 'react'
 import withImage from './HOC/withImage'
 import Spinner from './Spinner'
 import ImageBox from './ImageBox'
 
-const ImageFullScreen = React.lazy(() => import('./ImageFullScreen'));
+const ImageFullScreen = React.lazy(() => import('./ImageFullScreen'))
 
-export default class ImagesList extends Component {
-  constructor (props) {
-    super(props)
+const ImagesList = (props) => {
+  let images, FullScreenImage
 
-    this.state = {
-      fullScreenImageId: '',
-    }
+  const [fullScreenImageId, setFullScreenImageId] = useState('')
 
-
-    this.loadImagesOnScroll = this.loadImagesOnScroll.bind(this)
-    this.addScrollListener = this.addScrollListener.bind(this)
-    this.showFullScreen = this.showFullScreen.bind(this)
-    this.closeFullScreen = this.closeFullScreen.bind(this)
-  }
-
-  loadImagesOnScroll (e) {
-    if (this.props.scrolledToBottom()) {
-      this.props.loadImages()
-    }
-  }
-
-  addScrollListener () {
-    window.addEventListener('scroll', this.loadImagesOnScroll, true)
-  }
-
-  showFullScreen (e, id) {
+  const showFullScreen = (e, id) => {
     e.preventDefault()
     document.body.classList.add('full-screen')
-    this.setState({
-      fullScreenImageId: id
-    })
+    setFullScreenImageId(id)
   }
 
-  closeFullScreen (e) {
+  const closeFullScreen = (e) => {
     e.preventDefault()
     document.body.classList.remove('full-screen')
-    this.setState({
-      fullScreenImageId: ''
-    })
+    setFullScreenImageId('')
   }
 
-  componentDidMount (props) {
-    this.props.loadImages()
-    this.addScrollListener()
-  }
-
-  render () {
-    let images, FullScreenImage
-
-    if (this.props.images && this.props.images.length) {
-      images = this.props.images.map(item => {
-        const Image = withImage(ImageBox, item, (e) => this.showFullScreen(e, item.id))
-        return <Image key={item.id} />
-      }
-      )
-
-      if (this.state.fullScreenImageId) {
-        const fullScreenImageItem = (this.props.images.find(item => item.id === this.state.fullScreenImageId))
-        const Image = withImage(ImageFullScreen, fullScreenImageItem, this.closeFullScreen)
-        FullScreenImage = <Image />
-      }
+  const loadImagesOnScroll = (e) => {
+    if (props.scrolledToBottom()) {
+      props.loadImages()
     }
-
-    return (
-      <Fragment>
-        <div className='ImagesList'>
-          {images}
-        </div>
-        {FullScreenImage}
-        <Spinner show={this.props.isLoading} />
-      </Fragment>
-
-    )
   }
+
+  const addScrollListener = () => {
+    window.addEventListener('scroll', loadImagesOnScroll, true)
+  }
+
+  const [imagesFetched, setImagesFetched] = useState(false);
+  useEffect(() => {
+    if (!images && !imagesFetched) {
+      props.loadImages()
+      addScrollListener()
+      setImagesFetched(true)
+    }
+  })
+
+  if (props.images && props.images.length) {
+    images = props.images.map(item => {
+      const Image = withImage(ImageBox, item, (e) => showFullScreen(e, item.id))
+      return <Image key={item.id} />
+    })
+
+    if (fullScreenImageId) {
+      const fullScreenImageItem = (props.images.find(item => item.id === fullScreenImageId))
+      const Image = withImage(ImageFullScreen, fullScreenImageItem, closeFullScreen)
+      FullScreenImage = <Image />
+    }
+  }
+ 
+  return (
+    <>
+      <div className='ImagesList'>
+        {images}
+      </div>
+      {FullScreenImage}
+      <Spinner show={props.isLoading} />
+    </>
+
+  )
 }
+
+export default ImagesList
