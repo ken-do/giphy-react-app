@@ -8,7 +8,7 @@ module.exports = () => ({
   output: {
     filename: 'production.js',
     chunkFilename: 'chunk-[name].[contenthash].js',
-    publicPath: path.join(path.resolve(__dirname, '..', 'build'), '/')
+    publicPath: '/',
   },
   optimization: {
     splitChunks: {
