@@ -1,4 +1,4 @@
-import React, { Fragment, Component, useEffect, useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import withImage from './HOC/withImage'
 import Spinner from './Spinner'
 import ImageBox from './ImageBox'
