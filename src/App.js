@@ -1,4 +1,4 @@
-import React, { Component, Fragment, Suspense } from 'react'
+import React, { Component, Suspense } from 'react'
 import { hot } from 'react-hot-loader'
 import Page from './components/Page'
 import Heading from './components/Heading'

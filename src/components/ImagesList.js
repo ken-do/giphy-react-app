@@ -32,7 +32,7 @@ const ImagesList = (props) => {
     window.addEventListener('scroll', loadImagesOnScroll, true)
   }
 
-  const [imagesFetched, setImagesFetched] = useState(false);
+  const [imagesFetched, setImagesFetched] = useState(false)
   useEffect(() => {
     if (!images && !imagesFetched) {
       props.loadImages()
@@ -53,7 +53,7 @@ const ImagesList = (props) => {
       FullScreenImage = <Image />
     }
   }
- 
+
   return (
     <>
       <div className='ImagesList'>
