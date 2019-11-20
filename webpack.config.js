@@ -1,5 +1,4 @@
 const path = require('path')
-const webpack = require('webpack')
 const webpackMerge = require('webpack-merge')
 const HtmlWebPackPlugin = require('html-webpack-plugin')
 const Dotenv = require('dotenv-webpack')
@@ -44,7 +43,6 @@ module.exports = ({ mode } = { mode: 'production' }) => {
           template: './src/index.html',
           filename: './index.html'
         }),
-        new webpack.HotModuleReplacementPlugin()
       ]
     },
     modeConfiguration(mode)
