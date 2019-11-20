@@ -1,4 +1,5 @@
 module.exports = () => ({
+  devtool: "cheap-module-eval-source-map",
   module: {
     rules: [
       {
@@ -6,5 +7,8 @@ module.exports = () => ({
         use: ['style-loader', 'css-loader', 'sass-loader']
       }
     ]
+  },
+  optimization: {
+    usedExports: true
   }
 })
