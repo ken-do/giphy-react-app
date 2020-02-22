@@ -1,14 +1,11 @@
 import React from 'react'
 import { shallow } from 'enzyme'
 import Page from './Page'
-import ImagesList from './HOC/ImagesListContainer'
-import Heading from './Heading'
 
 describe('Page', () => {
-  let wrapper, mockProps
+  let wrapper
 
   beforeEach(() => {
-    const title = ''
     wrapper = shallow(
       <Page render={jest.fn()} />
     )

@@ -47,8 +47,8 @@
     "start": "npm run serve -- --env.mode development",
     "start-prod": "npm run serve -- --port 8081 --path build --env.mode production",
     "build": "webpack --env.mode production",
-    "test": "jest --watchAll || ECHO.",
-    "standard-fix": "standard --fix || ECHO."
+    "test": "eslint src && jest --watchAll",
+    "fix": "eslint --fix src"
   },
   "keywords": [],
   "author": "",

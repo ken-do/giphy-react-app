@@ -6,7 +6,6 @@ import thunk from 'redux-thunk'
 import { Provider } from 'react-redux'
 
 import App from './App'
-import Page from './components/Page'
 
 const middlewares = [thunk]
 const mockStore = configureMockStore(middlewares)

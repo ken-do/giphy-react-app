@@ -7,7 +7,7 @@ export const loadImages = () => {
     if (!getState().fetch.loading) {
       dispatch(fetchImagesRequets())
 
-      let url = endpoints.GIPHY_TRENDING_IMAGES + `?api_key=${process.env.GIPHY_API_KEY}&limit=20`
+      let url = endpoints.GIPHY_TRENDING_IMAGES + `?api_key=vdKGAd9p6CzDCORf8xD09w5fjeeo0nwj&limit=20`
 
       if (getState().images && getState().images.length) {
         url += '&offset=' + getState().images.length
