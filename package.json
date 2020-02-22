@@ -56,7 +56,7 @@
     "start": "npm run serve -- --env.mode development",
     "start-prod": "npm run serve -- --port 8081 --path build --env.mode production",
     "build": "webpack --env.mode production",
-    "test": "eslint src && jest --watchAll",
+    "test": "eslint src && jest",
     "fix": "eslint --fix src"
   },
   "pre-commit": [
