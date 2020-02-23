@@ -3,15 +3,13 @@ import { shallow } from 'enzyme'
 import Page from './Page'
 
 describe('Page', () => {
-  let wrapper
+    let wrapper
 
-  beforeEach(() => {
-    wrapper = shallow(
-      <Page render={jest.fn()} />
-    )
-  })
+    beforeEach(() => {
+        wrapper = shallow(<Page render={jest.fn()} />)
+    })
 
-  it('should render without crashing', () => {
-    expect(wrapper).toBeDefined()
-  })
+    it('should render without crashing', () => {
+        expect(wrapper).toBeDefined()
+    })
 })

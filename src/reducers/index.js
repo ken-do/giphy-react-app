@@ -3,6 +3,6 @@ import { imageReducer } from './imageReducer'
 import { fetchReducer } from './fetchReducer'
 
 export default combineReducers({
-  images: imageReducer,
-  fetch: fetchReducer
+    images: imageReducer,
+    fetch: fetchReducer,
 })
