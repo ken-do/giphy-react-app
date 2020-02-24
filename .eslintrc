@@ -4,7 +4,7 @@
         "es6": true,
         "jest": true
     },
-    "extends": ["plugin:react/recommended", "standard"],
+    "extends": ["plugin:react/recommended", "prettier"],
     "globals": {
         "Atomics": "readonly",
         "SharedArrayBuffer": "readonly"
@@ -18,13 +18,14 @@
         "sourceType": "module",
         "allowImportExportEverywhere": true
     },
-    "plugins": ["react"],
+    "plugins": ["react", "prettier"],
     "rules": {
         "quotes": ["error", "single"],
         "semi": ["error", "never"],
-        "comma-dangle": ["error", "never"],
+        "comma-dangle": ["error", "always-multiline"],
         "no-trailing-spaces": ["error", { "skipBlankLines": true }],
-        "react/prop-types": 0
+        "react/prop-types": 0,
+        "prettier/prettier": ["error"]
     },
     "settings": {
         "react": {

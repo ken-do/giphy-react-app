@@ -2,8 +2,7 @@ import React, { useEffect, useState } from 'react'
 import withImage from './HOC/withImage'
 import Spinner from './Spinner'
 import ImageBox from './ImageBox'
-
-const ImageFullScreen = React.lazy(() => import('./ImageFullScreen'))
+import ImageFullScreen from './ImageFullScreen'
 
 const ImagesList = props => {
     let images, FullScreenImage

@@ -1,4 +1,5 @@
 const path = require('path')
+const nodeExternals = require('webpack-node-externals')
 const webpackMerge = require('webpack-merge')
 const HtmlWebPackPlugin = require('html-webpack-plugin')
 const Dotenv = require('dotenv-webpack')
@@ -8,19 +9,14 @@ const modeConfiguration = env => require(`./build-utils/webpack.${env}`)(env)
 const mode = process.env.NODE_ENV || 'development'
 
 module.exports = () => {
-    console.log(mode)
     return webpackMerge(
         {
-            mode,
-            entry: './src/index.js',
-            devServer: {
-                hot: true,
-                open: true,
-            },
+            entry: './server/index.js',
+            target: 'node',
+            externals: [nodeExternals()],
             output: {
-                publicPath: '/',
-                path: path.resolve(__dirname, 'build'),
-                filename: 'bundled.js',
+                path: path.resolve('server-build'),
+                filename: 'index.js',
             },
             module: {
                 rules: [
@@ -38,7 +34,7 @@ module.exports = () => {
                     },
                     {
                         test: /\.sa?css$/,
-                        use: ['style-loader', 'css-loader', 'sass-loader'],
+                        use: ['css-loader', 'sass-loader'],
                     },
                 ],
             },
