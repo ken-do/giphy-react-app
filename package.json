@@ -62,13 +62,14 @@
     "serve": "webpack-dev-server",
     "start": "npm run serve -- --env.mode development",
     "start-prod": "npm run serve -- --port 8081 --path build --env.mode production",
-    "build": "webpack --env.mode production -w",
+    "build": "webpack --env.mode production",
     "test": "eslint src && jest",
     "lint-fix": "eslint --fix src",
     "format": "prettier --write src/**/*.js src/*.js server/*.js server/**/*.js",
+    "dev:build": "webpack --env.mode development -w",
     "dev:build-server": "NODE_ENV=development webpack  --mode development --config webpack.server.js -w",
     "dev:start": "nodemon ./server-build/index.js",
-    "dev": "run-p build dev:build-server dev:start"
+    "dev": "run-p dev:*"
   },
   "pre-commit": [
     "test",
