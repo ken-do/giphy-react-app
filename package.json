@@ -59,7 +59,7 @@
     "webpack-node-externals": "^1.7.2"
   },
   "scripts": {
-    "serve": "webpack-dev-server",
+    "serve": "webpack-dev-server --host 0.0.0.0 --port 8080 --progress",
     "start": "npm run serve -- --env.mode development",
     "start-prod": "npm run serve -- --port 8081 --path build --env.mode production",
     "build": "webpack --mode production",
@@ -70,7 +70,8 @@
     "dev:build": "webpack --mode development -w",
     "dev:build-server": "NODE_ENV=development webpack  --mode development --config webpack.server.js -w",
     "dev:start": "nodemon ./server-build/index.js",
-    "dev": "run-p dev:*"
+    "dev": "run-p dev:*",
+    "start-server": "node ./server-build/production.js"
   },
   "pre-commit": [
     "test",
