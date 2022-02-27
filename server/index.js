@@ -22,36 +22,29 @@ function handleRender(req, res) {
     )
 
     const indexFilePath = path.resolve('./build/index.html')
-    fs.readFile(indexFilePath, 'utf8', function(err, data) {
+    fs.readFile(indexFilePath, 'utf8', function(err, pageData) {
         if (err) {
             console.error('Something went wrong:', err)
             return res.status(500).send('Oops, better luck next time!')
         }
         const preloadedState = store.getState()
 
-        return res.send(renderFullPage(reactApp, preloadedState))
+        return res.send(renderFullPage(pageData, reactApp, preloadedState))
     })
 }
-function renderFullPage(html, preloadedState) {
-    return `
-      <!doctype html>
-      <html>
-        <head>
-          <title>Giphy React App</title>
-        </head>
-        <body>
-          <div id="root">${html}</div>
-          <script>
-            // WARNING: See the following for security issues around embedding JSON in HTML:
-            // https://redux.js.org/recipes/server-rendering/#security-considerations
-            window.__PRELOADED_STATE__ = ${JSON.stringify(
-                preloadedState,
-            ).replace(/</g, '\\u003c')}
-          </script>
-          <script src="/static/bundled.js"></script>
-        </body>
-      </html>
-      `
+function renderFullPage(pageData, reactApp, preloadedState) {
+    return pageData.replace(
+        '<div id="root"></div>',
+        `<div id="root">${reactApp}</div>
+        <script>
+          // WARNING: See the following for security issues around embedding JSON in HTML:
+          // https://redux.js.org/recipes/server-rendering/#security-considerations
+          window.__PRELOADED_STATE__ = ${JSON.stringify(preloadedState).replace(
+              /</g,
+              '\\u003c',
+          )}
+        </script>`,
+    )
 }
 app.listen(PORT, () => {
     ;`APP LISTENS ON PORT ${PORT}`

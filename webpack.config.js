@@ -5,10 +5,9 @@ const Dotenv = require('dotenv-webpack')
 const { CleanWebpackPlugin } = require('clean-webpack-plugin')
 
 const modeConfiguration = env => require(`./build-utils/webpack.${env}`)(env)
-const mode = process.env.NODE_ENV || 'development'
 
-module.exports = () => {
-    console.log(mode)
+module.exports = (env, argv) => {
+    const mode = argv.mode
     return webpackMerge(
         {
             mode,
